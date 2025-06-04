@@ -21,8 +21,43 @@ function log(message: string, source = "express") {
 function serveStatic(app: express.Express) {
   const distPath = path.resolve(process.cwd(), "dist", "public");
   
+  log(`Looking for static files at: ${distPath}`);
+  
   if (!fs.existsSync(distPath)) {
-    throw new Error(`Could not find the build directory: ${distPath}, make sure to build the client first`);
+    log(`Build directory not found at ${distPath}, trying alternative paths...`);
+    
+    // Try alternative paths that Azure might use
+    const altPaths = [
+      path.resolve(process.cwd(), "public"),
+      path.resolve(process.cwd(), "dist"),
+      path.resolve(process.cwd(), "build")
+    ];
+    
+    let foundPath = null;
+    for (const altPath of altPaths) {
+      if (fs.existsSync(altPath)) {
+        foundPath = altPath;
+        log(`Found static files at alternative path: ${altPath}`);
+        break;
+      }
+    }
+    
+    if (!foundPath) {
+      log(`No static files found. Available directories: ${fs.readdirSync(process.cwd()).join(', ')}`);
+      // Continue without static files - API will still work
+      return;
+    }
+    
+    app.use(express.static(foundPath));
+    app.use("*", (_req, res) => {
+      const indexPath = path.resolve(foundPath, "index.html");
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        res.status(404).send("Frontend not built");
+      }
+    });
+    return;
   }
 
   app.use(express.static(distPath));
@@ -82,7 +117,7 @@ app.use((req, res, next) => {
   server.listen(PORT, "0.0.0.0", () => {
     log(`serving on port ${PORT}`);
     
-    // Start incremental updates
+    // Start consolidated daily sync
     dailyKnowledgeBaseSync.startAutoSync().catch(console.error);
   });
 })();
