@@ -184,7 +184,7 @@ export class DailyKnowledgeBaseSync {
       kbproduct: item.KBProduct || '',
       kbIsPrivate: item.KBIsPrivate === true,
       kbStatus: parseInt(item.KBStatus) || 0,
-      url: `https://app.atera.com/Admin/KnowledgeBase/${item.KBID}`
+      url: `https://helpdesk.anthemproperties.com/knowledgebase/article/${item.KBID}`
     })).filter(article => article.id && article.title !== 'Knowledge Base Article' && article.content);
   }
 
