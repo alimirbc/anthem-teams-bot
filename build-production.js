@@ -20,7 +20,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import path from "path";
 import fs from "fs";
-import { incrementalUpdater } from "./lib/incrementalUpdater";
+import { dailyKnowledgeBaseSync } from "./lib/dailyKnowledgeBaseSync";
 
 const app = express();
 app.use(express.json());
@@ -90,8 +90,8 @@ app.use((req, res, next) => {
   server.listen(PORT, "0.0.0.0", () => {
     console.log(\`\${new Date().toLocaleTimeString()} [express] serving on port \${PORT}\`);
     
-    // Start incremental updates
-    incrementalUpdater.startAutoUpdates().catch(console.error);
+    // Start consolidated daily sync
+    dailyKnowledgeBaseSync.startAutoSync().catch(console.error);
   });
 })();
 `;
