@@ -2,7 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import path from "path";
 import fs from "fs";
-import { incrementalUpdater } from "./lib/incrementalUpdater";
+import { dailyKnowledgeBaseSync } from "./lib/dailyKnowledgeBaseSync";
 
 const app = express();
 app.use(express.json());
@@ -83,6 +83,6 @@ app.use((req, res, next) => {
     log(`serving on port ${PORT}`);
     
     // Start incremental updates
-    incrementalUpdater.startAutoUpdates().catch(console.error);
+    dailyKnowledgeBaseSync.startAutoSync().catch(console.error);
   });
 })();
