@@ -15,7 +15,7 @@ cp -r dist /home/site/wwwroot/
 cp server.js /home/site/wwwroot/
 cp startup.js /home/site/wwwroot/
 cp web.config /home/site/wwwroot/
-cp package.json /home/site/wwwroot/
+cp package-azure.json /home/site/wwwroot/package.json
 cp -r node_modules /home/site/wwwroot/
 
 echo "Azure deployment completed!"
