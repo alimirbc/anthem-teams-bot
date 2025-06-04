@@ -1,0 +1,10 @@
+build:
+  commands:
+    - echo "Building Teams bot application"
+    - npm ci
+    - npm run build
+  
+run:
+  commands:
+    - echo "Starting Teams bot server"
+    - npm start

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "920be9fe-cb5c-4443-8d80-587d0383db08",
+  "packageName": "com.anthemproperties.itsupportbot",
+  "developer": {
+    "name": "Anthem Properties",
+    "websiteUrl": "https://anthemproperties.com",
+    "privacyUrl": "https://anthemproperties.com/privacy",
+    "termsOfUseUrl": "https://anthemproperties.com/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "IT Support Assistant",
+    "full": "AI-Powered IT Support Specialist for Microsoft Teams"
+  },
+  "description": {
+    "short": "Expert IT support bot with knowledge base integration",
+    "full": "Sophisticated AI-powered IT support assistant that intelligently searches knowledge base articles, provides comprehensive troubleshooting guidance, and delivers rich, interactive responses directly within Microsoft Teams."
+  },
+  "accentColor": "#6264A7",
+  "bots": [
+    {
+      "botId": "920be9fe-cb5c-4443-8d80-587d0383db08",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "messagingEndpoint": "https://anthemproperties.replit.app/api/messages",
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "team",
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "Help",
+              "description": "Get help with using the IT Support Assistant"
+            },
+            {
+              "title": "Troubleshoot",
+              "description": "Start troubleshooting a technical issue"
+            },
+            {
+              "title": "Status",
+              "description": "Check bot status and capabilities"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "anthemproperties.com",
+    "helpdesk.anthemproperties.com",
+    "anthemproperties.replit.app"
+  ],
+  "webApplicationInfo": {
+    "id": "920be9fe-cb5c-4443-8d80-587d0383db08",
+    "resource": "https://RscBasedStoreApp"
+  }
+}
