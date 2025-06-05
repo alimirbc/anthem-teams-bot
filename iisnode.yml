@@ -1,0 +1,7 @@
+node_env: production
+nodeProcessCommandLine: node
+loggingEnabled: true
+debuggingEnabled: false
+devErrorsEnabled: false
+watchedFiles: "*.js;iisnode.yml"
+enableXFF: true
