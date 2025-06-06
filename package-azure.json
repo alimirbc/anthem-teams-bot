@@ -4,16 +4,14 @@
   "description": "Microsoft Teams IT Support Bot with AI-powered responses",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "bash start.sh",
     "build": "npx vite build",
-    "dev": "NODE_ENV=development tsx server/index.ts",
-    "db:push": "drizzle-kit push"
+    "dev": "NODE_ENV=development tsx server/index.ts"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "pg": "^8.11.0"
+    "express": "^4.19.2"
   }
 }
