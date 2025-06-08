@@ -60,11 +60,15 @@ if (staticPath) {
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
+  console.log('Health check requested from:', req.ip);
+  res.setHeader('Cache-Control', 'no-cache');
   res.json({ 
     status: 'healthy',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || 'production',
-    staticPath: staticPath || 'none'
+    staticPath: staticPath || 'none',
+    port: process.env.PORT,
+    hostname: process.env.WEBSITE_HOSTNAME || 'local'
   });
 });
 
@@ -128,10 +132,19 @@ app.get('*', (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Azure server successfully started on port ${PORT}`);
-  console.log(`Server URL: http://localhost:${PORT}`);
+const HOST = process.env.WEBSITE_HOSTNAME ? '127.0.0.1' : '0.0.0.0';
+
+const server = app.listen(PORT, HOST, () => {
+  console.log(`Azure server successfully started on ${HOST}:${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
+  console.log(`Azure hostname: ${process.env.WEBSITE_HOSTNAME || 'local'}`);
   console.log(`Static files: ${staticPath || 'fallback content'}`);
+  
+  // Test endpoint accessibility
+  console.log('Server endpoints:');
+  console.log(`- Health: http://${HOST}:${PORT}/api/health`);
+  console.log(`- Config: http://${HOST}:${PORT}/api/config`);
+  console.log(`- Frontend: http://${HOST}:${PORT}/`);
 });
 
 // Graceful shutdown
